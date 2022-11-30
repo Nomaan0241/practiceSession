@@ -1,0 +1,11 @@
+{
+    "id": 1,
+    "title": "Backpack",
+    "price": 109.95,
+    "category": "men's clothing",
+    "availableStock": 25,
+    "rating": {
+        "rate": 3.9,
+        "count": 120
+    }
+}

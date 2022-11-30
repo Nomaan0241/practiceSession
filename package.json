@@ -1,0 +1,21 @@
+{
+  "name": "express-mongo-connect-v2",
+  "version": "0.2.0",
+  "description": "Creating mongo and express from scracth",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:local": "nodemon server.js",
+    "debug": "ndb server.js"
+  },
+  "author": "Nomaan shaikh",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "git": "^0.1.5",
+    "mongoose": "^6.7.2",
+    "morgan": "^1.10.0"
+  }
+}
