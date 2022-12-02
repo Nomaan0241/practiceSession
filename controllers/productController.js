@@ -1,6 +1,7 @@
 import Product from "../models/productModel.js";
 import AbstractOptions from "../utils/AbstractOptions.js";
 import catchApiErrors from "../utils/catchApiErrors.js";
+
 const welcome = (req, res) => {
 	res.status(200).json({
 		status: "success",
