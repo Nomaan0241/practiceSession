@@ -28,7 +28,7 @@ class AbstractOptions {
 
 	pagination() {
 		let page = this.requestQuery.page * 1 || 1;
-		let skip = this.requestQuery.skip * 1 || 3;
+		let skip = this.requestQuery.skip * 1 || 100;
 		let limit = (page - 1) * skip;
 		this.query.skip(limit).limit(skip);
 		return this;

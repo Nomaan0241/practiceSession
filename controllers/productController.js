@@ -24,7 +24,7 @@ const createProduct = async (req, res) => {
 };
 
 const getProduct = catchApiErrors(async (req, res, next) => {
-	const product = await Product.fin();
+	const product = await Product.find();
 	res.status(200).json({
 		status: "success",
 		result: product.length,

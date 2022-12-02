@@ -2,14 +2,47 @@ import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema(
 	{
-		name: {
+		id: {
 			type: String,
-			required: [true, "user name is mandatory"],
+		},
+		title: {
+			type: String,
+		},
+		description: {
+			type: String,
 		},
 		price: {
 			type: Number,
-			required: [true, "Price is required"],
 		},
+		discountPercentage: {
+			type: Number,
+		},
+		rating: {
+			type: Number,
+		},
+		stock: {
+			type: Number,
+		},
+		brand: {
+			type: String,
+		},
+		category: {
+			type: String,
+		},
+		thumbnail: {
+			type: String,
+		},
+		images: {
+			type: Array,
+		},
+		// name: {
+		// 	type: String,
+		// 	required: [true, "user name is mandatory"],
+		// },
+		// price: {
+		// 	type: Number,
+		// 	required: [true, "Price is required"],
+		// },
 	},
 	{
 		//If your are trying to send the json to the frontend
@@ -22,7 +55,7 @@ const productSchema = new mongoose.Schema(
 //prductSchema.virtual("propety-name").get("CallbackFunction")
 //It will have the access to the data which have beed fetched by other call
 
-productSchema.virtual("category").get(function () {
+productSchema.virtual("price-range").get(function () {
 	if (this.price > 150) return "Premium";
 	else if (this.price > 70 && this.price <= 150) return "Mid Range";
 	return "Low Range";
