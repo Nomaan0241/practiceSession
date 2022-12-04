@@ -28,11 +28,13 @@ const userSchema = new mongoose.Schema({
 			message: "The password are not matching.",
 		},
 	},
+	passwordChangedTimeStamp: Date,
 });
 
 userSchema.pre("save", async function (next) {
 	if (!this.isModified("password")) return next();
 	this.password = await bcrypt.hash(this.password, 1);
+	this.passwordChangedTimeStamp = Date.now() - 1000;
 	this.confirmPassword = undefined;
 	next();
 });
@@ -42,6 +44,23 @@ userSchema.methods.validatePassword = async function (
 	dbPassword
 ) {
 	return await bcrypt.compare(clientPassword, dbPassword);
+};
+
+/** What if we signed in from two devices and we changed the password from the
+ * sconded device. The first device should not be able to access anything or
+ * perform any action.
+ * To implement that we added passwordChangedTime in model
+ * Compare it with token issued time .
+ * The user shuld always be created first then the token shuld be generated.
+ * means tokenIssue time must be greated than password changed time
+ */
+userSchema.methods.tokenPasswordValidation = function (tokenIssueDate) {
+	if (this.passwordChangedTimeStamp) {
+		const passwordChanged = Math.floor(
+			this.passwordChangedTimeStamp.getTime() / 1000
+		);
+		return tokenIssueDate > passwordChanged;
+	}
 };
 
 const User = mongoose.model("user", userSchema);

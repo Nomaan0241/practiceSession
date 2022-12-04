@@ -59,15 +59,18 @@ const authenticateUser = catchApiErrors(async (req, res, next) => {
 
 	const user = await User.findById(verifyToken.id);
 
-	if (!user)
+	if (!user) {
 		return next(new AbstractApplicationError("User does not exist", 401));
+	}
+
+	if (!user.tokenPasswordValidation(verifyToken.iat)) {
+		return next(
+			new AbstractApplicationError("Password has been changed Relogin", 401)
+		);
+	}
 
 	req.user = user;
-
-	console.log(user);
 	next();
 });
 
 export { signUp, signIn, authenticateUser };
-
-48.2;
