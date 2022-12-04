@@ -1,3 +1,5 @@
+import { authenticateUser } from "../controllers/authenticationController.js";
+
 import express from "express";
 import {
 	welcome,
@@ -12,13 +14,19 @@ import {
 
 const router = express.Router();
 
-router.route("/welcome").get(welcome);
+router.route("/welcome").get(authenticateUser, welcome);
 // router.route("/").get(getProduct).post(createProduct).delete(findOneAndDelete);
 // temperay turned of createUser route cuz need to modify client's body of request
-router.route("/").get(getProduct).delete(findOneAndDelete);
-router.route("/filter").get(getProductByFiltering);
-router.route("/single").get(findOneProduct);
-router.route("/:id").get(getProductById).put(updateProductbyID);
+router
+	.route("/")
+	.get(authenticateUser, getProduct)
+	.delete(authenticateUser, findOneAndDelete);
+router.route("/filter").get(authenticateUser, getProductByFiltering);
+router.route("/single").get(authenticateUser, findOneProduct);
+router
+	.route("/:id")
+	.get(authenticateUser, getProductById)
+	.put(authenticateUser, updateProductbyID);
 
 export default router;
 
