@@ -60,7 +60,8 @@ const updateProductbyID = catchApiErrors(async (req, res) => {
 });
 
 const findOneProduct = catchApiErrors(async (req, res) => {
-	//console.log(req.params);
+	console.log(req.params);
+	console.log(req.query);
 	const product = await Product.findOne(req.query);
 
 	res.status(200).json({

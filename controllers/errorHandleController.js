@@ -9,10 +9,10 @@ const applicationErrors = (err, req, res, next) => {
 			// stack: err.stack,
 		});
 	} else {
-		// res.status(err.statusCode).json({
-		// 	status: err.status,
-		// 	message: err.message,
-		// });
+		res.status(err.statusCode).json({
+			status: err.status,
+			message: err.message,
+		});
 	}
 };
 

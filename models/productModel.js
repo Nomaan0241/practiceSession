@@ -66,13 +66,13 @@ productSchema.virtual("price-range").get(function () {
 //before executing the query execute this portion
 //It will get called only before the "findOne"/"findById" event occured
 //findById is equvivalant to findOne({_id:value})
-productSchema.pre("findOne", function (next) {
-	console.log("Pre Middleware");
-});
+// productSchema.pre("findOne", function (next) {
+// 	console.log("Pre Middleware");
+// });
 
-productSchema.post("findOne", function (document, next) {
-	console.log("Post Middleware !!! ");
-});
+// productSchema.post("findOne", function (document, next) {
+// 	console.log("Post Middleware !!! ");
+// });
 
 const Product = mongoose.model("products", productSchema);
 
